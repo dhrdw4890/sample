@@ -1,0 +1,18 @@
+<div class="center">
+  <h1>謎解き 掲示板</h1>
+  <h2>
+      このページは全国の人からクイズを出題してもらえるサイトです 
+  </h2>
+  <% if !logged_in? %>
+  <p><%= link_to "<新規登録はこちら>", signup_path, class: "btn" %></p>
+  <% end %>
+  <%= image_tag("quiz.png", alt: "クイズの写真") %>
+</div>
+<ul class="posts">
+  <% @posts.each do |post| %>
+    <li>
+      <%= post.content %>
+      <%= image_tag post.image.url if post.image? %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,15 @@
+<% provide(:title, 'All posts') %>
+<h1>投稿一覧</h1>
+
+<ol class="posts">
+  <% @posts.each do |post| %>
+    <li>
+      <p><%= link_to post.user.name, "users/#{post.user.id}" %></p>
+      <p><%= post.content %></p>
+      <p><%= image_tag post.image.url if post.image? %></p>
+      <p>投稿 <%= time_ago_in_words(post.created_at) %> 前</p>
+    </li>
+  <% end %>
+</ol>
+
+<%= paginate @posts %>

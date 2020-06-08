@@ -1,4 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col">
+    <section class="user_info">
+      <h1>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <% if current_user %>
+      <%= link_to "登録情報の修正", edit_user_path(current_user) %>
+      <%= link_to "アカウント削除", @user, method: :delete,
+                        data: { confirm: "本当によろしいですか？" } %>
+      <%= link_to "新規投稿", new_post_path %>
+    <% end %>
+  </aside>
+  <div class="col">
+    <% if @user.posts.any? %>
+      <h3>投稿 (<%= @user.posts.count %>)</h3>
+      <ol class="posts">
+        <%= render @posts %>
+      </ol>
+      <%= paginate @posts %>
+    <% end %>       
+  </div>
+</div>
