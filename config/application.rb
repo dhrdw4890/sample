@@ -1,4 +1,4 @@
-require_relative 'boot'
+require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
@@ -17,5 +17,6 @@ module Sample
     # the framework and any gems in your application.
     config.i18n.default_locale = :ja #jaに変更
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end
