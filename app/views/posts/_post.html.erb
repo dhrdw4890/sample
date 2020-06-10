@@ -1,4 +1,4 @@
-<li id="post-<%= post.id %>">
+<li id="post-<%= post.id %>" data-post-id="<%= post.id %>">
   <span class="user"><%= link_to post.user.name, post.user %></span>
   <span class="content">
     <%= post.content %>
@@ -11,4 +11,5 @@
                                        data: { confirm: "本当によろしいですか？" } %>
     <% end %>
   </span>
+  <%= render "likes/like", post: post %>
 </li>
