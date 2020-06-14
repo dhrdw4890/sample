@@ -1,8 +1,8 @@
-<% provide(:title, 'All users') %>
+<% provide(:title, '全てのユーザー') %>
 <h1>全てのユーザー</h1>
-
-<ul class="users">
-  <%= render @users %>
-</ul>
-
-<%= paginate @users %>
+<div class="row">
+  <ul class="col-lg-6 offset-3 list-group">
+    <%= render @users %>
+  </ul>
+ </div> 
+<%= will_paginate @users, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>

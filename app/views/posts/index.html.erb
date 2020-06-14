@@ -1,16 +1,17 @@
-<% provide(:title, 'All posts') %>
+<% provide(:title, 'クイズ投稿一覧') %>
 <h1>投稿一覧</h1>
-
-<ol class="posts">
+<div class="row">
+<ol class="col-lg-8 offset-2 list-group">
   <% @posts.each do |post| %>
-    <li>
-      <p><%= link_to post.user.name, "users/#{post.user.id}" %></p>
+    <li class="list-group-item list-group-item-action flex-column align-items-start">
+      <%= image_tag post.user.image.url(:thumb) if post.user.image? %>
+      <%= link_to post.user.name, "users/#{post.user.id}" %>
       <p><%= post.content %></p>
       <p><%= image_tag post.image.url if post.image? %></p>
-      <p>投稿 <%= time_ago_in_words(post.created_at) %> 前</p>
-      <%= render "likes/like", post: post %>
+      投稿 <%= time_ago_in_words(post.created_at) %> 前
+      <%= link_to "詳細", post_path(post) %>
     </li>
   <% end %>
 </ol>
-
-<%= paginate @posts %>
+</div>
+<%= will_paginate @posts, :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>

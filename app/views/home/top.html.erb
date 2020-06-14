@@ -1,18 +1,21 @@
+<% provide(:title, "ホーム") %>
 <div class="center">
-  <h1>謎解き 掲示板</h1>
-  <h2>
+  <h1>謎解き広場</h1>
+  <h3>
       このページは全国の人からクイズを出題してもらえるサイトです 
-  </h2>
+  </h3>
   <% if !logged_in? %>
-  <p><%= link_to "<新規登録はこちら>", signup_path, class: "btn" %></p>
+  <p><%= link_to "<新規登録はこちら>", signup_path, class: "btn btn-outline-primary" %></p>
   <% end %>
-  <%= image_tag("quiz.png", alt: "クイズの写真") %>
+  <%= image_tag("quiz.png", alt: "クイズの写真", class: "img-fluid") %>
 </div>
-<ul class="posts">
-  <% @posts.each do |post| %>
-    <li>
-      <%= post.content %>
-      <%= image_tag post.image.url if post.image? %>
-    </li>
-  <% end %>
-</ul>
+<div class="row">
+  <ul class="col-lg-8 offset-2 list-group">
+    <% @posts.each do |post| %>
+      <li class="list-group-item list-group-item-action flex-column align-items-start ">
+        <%= post.content %>
+        <%= image_tag post.image.url if post.image? %>
+      </li>
+    <% end %>
+  </ul>
+</div>

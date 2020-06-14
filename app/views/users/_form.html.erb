@@ -11,7 +11,11 @@
   <%= f.password_field :password, class: 'form-control' %>
 
   <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, class: 'form-control' %>
+  <%= f.password_field :password_confirmation, class: 'form-control mb-3' %>
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <span class="image">
+    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+  </span>
+
+  <%= f.submit yield(:button_text), class: "btn btn-outline-primary" %>
 <% end %>

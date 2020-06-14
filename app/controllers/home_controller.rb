@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def top
-    @posts = Post.all.page(params[:page]).per(5)
+    @posts = Post.paginate(page: params[:page], per_page: 5)
   end
 
   def about

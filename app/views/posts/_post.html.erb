@@ -1,15 +1,12 @@
-<li id="post-<%= post.id %>" data-post-id="<%= post.id %>">
+<li id="post-<%= post.id %>" data-post-id="<%= post.id %>" 
+  class="list-group-item list-group-item-action flex-column align-items-start">
   <span class="user"><%= link_to post.user.name, post.user %></span>
   <span class="content">
     <%= post.content %>
     <%= image_tag post.image.url if post.image? %>  
   </span>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(post.created_at) %> ago.
-    <% if current_user?(post.user) %>
-      <%= link_to "削除", post, method: :delete,
-                                       data: { confirm: "本当によろしいですか？" } %>
-    <% end %>
+    投稿 <%= time_ago_in_words(post.created_at) %> 前
+  <%= link_to "詳細ページへ", post_path(post) %>
   </span>
-  <%= render "likes/like", post: post %>
 </li>

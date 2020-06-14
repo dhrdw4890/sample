@@ -1,0 +1,31 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-lg-5">
+    <section class="user">
+      <h1>
+        <%= image_tag @user.image.url(:thumb) if @user.image? %>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <% if current_user?(@user) %>
+      <%= link_to "登録情報の修正", edit_user_path(current_user), class: "btn btn-outline-info btn-sm" %>
+      <%= link_to "アカウント削除", @user, method: :delete,
+                        data: { confirm: "本当によろしいですか？" }, class: "btn btn-outline-danger btn-sm" %>
+      <p><%= link_to "クイズを投稿する", new_post_path, class: "btn btn-primary btn-lg m-4" %></p>
+    <% end %>
+    <section class="stats mb-3">
+      <%= render 'stats' %>
+    </section>
+    <%= render 'follow_form' if logged_in? %>
+  </aside>
+  <div class="col-lg-7">
+    <ul class="btn-group">
+      <li class="btn btn-secondary"><%= link_to("投稿", "/users/#{@user.id}") %></li>
+      <li class="btn btn-secondary"><%= link_to("いいね", "/users/#{@user.id}/likes") %></li>
+    </ul>
+      <h3>いいね！</h3>
+      <ol class="list-group">
+        <%= render 'likes' %>
+      </ol>
+  </div>
+</div>

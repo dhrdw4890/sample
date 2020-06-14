@@ -1,12 +1,16 @@
 <%= form_for(@post) do |f| %>
   <%= render 'users/error_messages', object: f.object %>
+
   <div class="field">
-    <%= f.text_area :content, placeholder: "新しい投稿を作成..." %>
+    <%= f.text_area :content, class: 'form-control mb-3', placeholder: "新しい投稿を作成..." %>
   </div>
   <span class="image">
-    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+    <%= f.file_field :image, class: 'form-control-file mb-3', accept: "image/jpeg,image/gif,image/png" %>
   </span>
-  <%= f.submit "Post", class: "btn" %>
+  <span class="answer">
+    <%= f.text_field :answer, class: 'form-control mb-3', placeholder: "ここに答えを入力..." %>
+  </span>
+  <%= f.submit yield(:button_text), class: "btn btn-primary btn-lg btn-block" %>
 <% end %>
 
 <script type="text/javascript">

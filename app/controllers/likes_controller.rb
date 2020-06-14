@@ -1,27 +1,14 @@
 class LikesController < ApplicationController
-  before_action :logged_in_user
 
   def create
-    @post = post.find(params[:post_id])
-    unless @post.iine?(current_user)
-      @post.iine(current_user)
-      @post.reload
-      respond_to do |format|
-        format.html { redirect_to request.referrer || root_url }
-        format.js
-      end
-    end
+    @like = Like.new(user_id: current_user.id, post_id: params[:post_id])
+    @like.save
+    redirect_back(fallback_location: root_url)
   end
 
   def destroy
-    @post = Like.find(params[:id]).post
-    if @post.iine?(current_user)
-      @post.uniine(current_user)
-      @post.reload
-      respond_to do |format|
-        format.html { redirect_to request.referrer || root_url }
-        format.js
-      end
-    end
+    @like = Like.find_by(user_id: current_user.id, post_id: params[:post_id])
+    @like.destroy
+    redirect_back(fallback_location: root_url)
   end
 end

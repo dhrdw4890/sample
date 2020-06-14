@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   
   def index
-    @users = User.all.page(params[:page]).per(10)
+    @users = User.paginate(page: params[:page])
   end
   
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page]).per(10)
+    @posts = @user.posts.paginate(page: params[:page], per_page: 10)
     @post = current_user.posts.build if logged_in?
   end
   
@@ -48,24 +48,29 @@ class UsersController < ApplicationController
   end
 
   def following
-    @title = "Following"
+    @title = "フォロー中"
     @user  = User.find(params[:id])
-    @users = @user.following.page(params[:page]).per(10)
+    @users = @user.following.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = "フォロワー"
     @user  = User.find(params[:id])
-    @users = @user.followers.page(params[:page]).per(10)
+    @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
+  end
+
+  def likes
+    @user  = User.find(params[:id])
+    @likes = Like.where(user_id: @user.id)
   end
 
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmetion)
+                                   :password_confirmetion, :image)
     end
 
     def correct_user

@@ -1,13 +1,19 @@
-<footer class="footer">
+<footer>
   <nav>
     <small>
-    The <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
-    by <a href="http://www.michaelhartl.com/">Michael Hartl</a>
-  </small>
-    <ul class="nav">
-      <li><%= link_to "About",   '#' %></li>
-      <li><%= link_to "Contact", '#' %></li>
-      <li><a href="http://news.railstutorial.org/">News</a></li>
+      Copyright © 2020 NAZOTOKI-HIROBA All Rights Reserved.
+    </small>
+    <ul>
+        <li><%= link_to "ホーム", root_path %></li>
+        <li><%= link_to "謎解き広場とは？", about_path %></li>
+        <% if logged_in? %>
+          <li><%= link_to "投稿一覧", posts_path %></li>
+          <li><%= link_to "ユーザー一覧", users_path %></li>
+          <li><%= link_to "マイページ", current_user %></li>
+          <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+        <% else %>
+        <li><%= link_to "ログイン", login_path %></li>
+        <% end %>
     </ul>
   </nav>
 </footer>

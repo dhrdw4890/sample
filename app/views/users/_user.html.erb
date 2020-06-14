@@ -1,3 +1,4 @@
-<li>
+<li class="list-group-item pl-5 list-group-item-action">
+  <%= image_tag user.image.url(:thumb) if user.image? %>
   <%= link_to user.name, user %>
 </li>
