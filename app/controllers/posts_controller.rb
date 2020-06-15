@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :create, :edit, :update, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :correct_user,   only: [:update, :destroy]
   
   def index
     @posts = Post.all.paginate(page: params[:page], per_page: 10)
@@ -8,7 +8,6 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
-    @user = @post.user
     @likes_count = Like.where(post_id: @post.id).count
   end
 
@@ -31,16 +30,18 @@ class PostsController < ApplicationController
   end
   
   def update
-    @post = Post.find_by(id: params[:id])
-    @post.content = params[:content]
-    @post.save
-    redirect_to("/posts/index")
+    if @post.update_attributes(post_params)
+      flash[:success] = "投稿を更新しました"
+      redirect_to("/posts")
+    else
+      render "edit"
+    end  
   end
 
   def destroy
     @post.destroy
     flash[:success] = "投稿を削除しました"
-    redirect_to request.referrer || root_url
+    redirect_to("/posts")
   end
 
   private

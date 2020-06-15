@@ -3,8 +3,8 @@
 <div class="row">
   <div class="col-lg-8 offset-2">
     <div class="post-user-name">
-      <%= image_tag @user.image.url(:thumb) if @user.image? %>
-      <%= link_to(@user.name, "/users/#{@user.id}") %>
+      <%= image_tag @post.user.image.url(:thumb) if @post.user.image? %>
+      <%= link_to(@post.user.name, "/users/#{@post.user.id}") %>
     </div>
     <p><%= @post.content %></p>
     <p><%= image_tag @post.image.url if @post.image? %></p>
@@ -13,13 +13,13 @@
     <div class="post-time">
       <%= @post.created_at %>
     </div>
-    <% if @post.user_id == current_user.id %>
+    <% if current_user?(@post.user) %>
       <div class="post-menus">
-        <%= link_to("編集", "/posts/#{@post.id}/edit") %>
-        <%= link_to("削除", "/posts/#{@post.id}/destroy", {method: "post"}) %>
+        <%= link_to "編集", edit_post_path(@post.id) %>
+        <%= link_to "削除", post_path(@post.id), method: :delete, data: { confirm: "本当によろしいですか？" } %>
       </div>
     <% end %>
-    <% if !current_user?(@user) %>
+    <% if !current_user?(@post.user) %>
     <% if Like.find_by(user_id: current_user.id, post_id: @post.id) %>
       <%= link_to("/likes/#{@post.id}/destroy", {method: "delete"}) do %>
         <span class="fa fa-heart like-btn-unlike"></span>
@@ -30,7 +30,7 @@
       <% end %>
     <% end %>
     <%= @likes_count %>
-      <h3>コメント</h3>
+      <h3 class="mt-5">コメント</h3>
       <% if @post.comments.any? %>
         <ul>
         <% @post.comments.each do |comment| %>
