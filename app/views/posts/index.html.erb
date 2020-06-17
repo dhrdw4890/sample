@@ -1,7 +1,7 @@
 <% provide(:title, 'クイズ投稿一覧') %>
 <h1>投稿一覧</h1>
 <div class="row">
-<ol class="col-lg-8 offset-2 list-group">
+<ol class="col-lg-8 offset-md-2 list-group">
   <% @posts.each do |post| %>
     <li class="list-group-item list-group-item-action flex-column align-items-start">
       <%= image_tag post.user.image.url(:thumb) if post.user.image? %>

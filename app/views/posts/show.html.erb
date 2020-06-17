@@ -1,7 +1,7 @@
 <% provide(:title, '詳細ページ') %>
 <h1>クイズの詳細ページ</h1>
 <div class="row">
-  <div class="col-lg-8 offset-2">
+  <div class="col-lg-8 offset-md-2">
     <div class="post-user-name">
       <%= image_tag @post.user.image.url(:thumb) if @post.user.image? %>
       <%= link_to(@post.user.name, "/users/#{@post.user.id}") %>

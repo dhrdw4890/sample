@@ -10,7 +10,7 @@
   <%= image_tag("top.png", alt: "クイズの写真", class: "img-fluid") %>
 </div>
 <div class="row">
-  <ul class="col-lg-8 offset-2 list-group">
+  <ul class="col-lg-8 offset-md-2 list-group">
     <% @posts.each do |post| %>
       <li class="list-group-item list-group-item-action flex-column align-items-start ">
         <%= post.content %>
