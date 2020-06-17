@@ -10,7 +10,8 @@ password = "password"
 User.create!(name:  name,
     email: email,
     password:              password,
-    password_confirmation: password)
+    password_confirmation: password,
+    image: File.open("./app/assets/images/default.png"))
 end
 
 users = User.order(:created_at).take(10)
