@@ -35,13 +35,34 @@ h3 {
 .center h1 {
   font-size: 3em;
   text-align: center;
+  color: white;
+  margin: 0;
 }
 
 .center h3 {
-  margin: 30px 0;
+  margin: 20px 0;
+  color: white;
+}
+
+.about {
+  color: white;
+}
+
+.jumbotron {
+  background-color: rgb(187, 187, 187);
+  padding: 1rem 1rem;
 }
 
 
+/* header */
+
+.search {
+  margin: 5px 20px 0 0;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+}
 
 /* footer */
 
