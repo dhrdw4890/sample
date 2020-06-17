@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
   mount_uploader :image, ImageUploader
+  default_scope -> { order(id: :asc) }
 
 
   def User.digest(string)
