@@ -3,7 +3,7 @@
   <span class="user"><%= link_to post.user.name, post.user %></span>
   <span class="content">
     <%= post.content %>
-    <%= image_tag post.image.url if post.image? %>  
+    <%= image_tag(post.image.url, class: "img-fluid") if post.image? %>  
   </span>
   <span class="timestamp">
     投稿 <%= time_ago_in_words(post.created_at) %> 前

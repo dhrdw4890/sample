@@ -14,7 +14,7 @@
     <% @posts.each do |post| %>
       <li class="list-group-item list-group-item-action flex-column align-items-start ">
         <%= post.content %>
-        <%= image_tag post.image.url if post.image? %>
+        <%= image_tag(post.image.url, class: "img-fluid") if post.image? %>
       </li>
     <% end %>
   </ul>

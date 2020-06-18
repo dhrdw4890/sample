@@ -7,7 +7,7 @@
       <%= image_tag post.user.image.url(:thumb) if post.user.image? %>
       <%= link_to post.user.name, "users/#{post.user.id}" %>
       <p><%= post.content %></p>
-      <p><%= image_tag post.image.url if post.image? %></p>
+      <p><%= image_tag(post.image.url, class: "img-fluid") if post.image? %></p>
       投稿 <%= time_ago_in_words(post.created_at) %> 前
       <%= link_to "詳細", post_path(post) %>
     </li>

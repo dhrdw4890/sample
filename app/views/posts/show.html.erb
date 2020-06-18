@@ -7,7 +7,7 @@
       <%= link_to(@post.user.name, "/users/#{@post.user.id}") %>
     </div>
     <p><%= @post.content %></p>
-    <p><%= image_tag @post.image.url if @post.image? %></p>
+    <p><%= image_tag(@post.image.url, class: "img-fluid") if @post.image? %></p>
         <%= render 'answer' %>
     投稿 <%= time_ago_in_words(@post.created_at) %> 前
     <div class="post-time">
